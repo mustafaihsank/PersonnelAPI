@@ -52,6 +52,8 @@ app.all("/", (req, res) => {
 
 // URL: /departments
 app.use("/departments", require("./src/routes/department.router"));
+// URL: /personnels
+app.use("/personnels", require("./src/routes/personnel.router"));
 
 /* ------------------------------------------------------- */
 
