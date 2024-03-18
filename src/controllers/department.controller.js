@@ -30,6 +30,24 @@ module.exports = {
       data,
     });
   },
-  update: async (req, res) => {},
-  delete: async (req, res) => {},
+  update: async (req, res) => {
+    const data = await DepartmentModel.updateOne(
+      { _id: req.params.id },
+      { ...req.body },
+      { runValidators: true }
+    );
+
+    es.status(202).send({
+      error: false,
+      data,
+    });
+  },
+  delete: async (req, res) => {
+    const data = await DepartmentModel.deleteOne({ _id: req.params.id });
+
+    res.status(data.deletedCount ? 204 : 404).send({
+      error: !data.deletedCount,
+      data,
+    });
+  },
 };
