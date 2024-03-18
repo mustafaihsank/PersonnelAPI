@@ -50,6 +50,9 @@ app.all("/", (req, res) => {
   });
 });
 
+// URL: /departments
+app.use("/departments", require("./src/routes/department.router"));
+
 /* ------------------------------------------------------- */
 
 // errorHandler:
