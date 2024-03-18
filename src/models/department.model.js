@@ -5,7 +5,6 @@
 const { mongoose } = require("../configs/dbConnection");
 /* ------------------------------------------------------- */
 
-// Declare the Schema of the Mongo model
 var DepartmentSchema = new mongoose.Schema(
   {
     name: {
@@ -24,5 +23,4 @@ var DepartmentSchema = new mongoose.Schema(
   { collection: "Department", timestamps: true }
 );
 
-//Export the model
 module.exports = mongoose.model("Department", DepartmentSchema);
