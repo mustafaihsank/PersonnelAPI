@@ -1,9 +1,9 @@
 "use strict";
+const departmentModel = require("../models/department.model");
+const PersonnelModel = require("../models/personnel.model");
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
-
-const PersonnelModel = require("../models/personnel.model");
 
 module.exports = {
   list: async (req, res) => {
@@ -15,6 +15,11 @@ module.exports = {
     });
   },
   create: async (req, res) => {
+    if (req.body.isLead)
+      await departmentModel.updateMany(
+        { departmentId: req.body.departmentId, isLead: true },
+        { isLead: false }
+      );
     const data = await PersonnelModel.create({ ...req.body });
 
     res.status(201).send({
@@ -31,13 +36,24 @@ module.exports = {
     });
   },
   update: async (req, res) => {
+    if (req.body.isLead) {
+      const { departmentId } = await PersonnelModel.findOne(
+        { _id: req.params.id },
+        { departmentId: 1 }
+      );
+      await PersonnelModel.updateMany(
+        { departmentId, isLead: true },
+        { isLead: false }
+      );
+    }
+
     const data = await PersonnelModel.updateOne(
       { _id: req.params.id },
       { ...req.body },
       { runValidators: true }
     );
 
-    es.status(202).send({
+    res.status(202).send({
       error: false,
       data,
     });

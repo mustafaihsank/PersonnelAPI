@@ -78,7 +78,7 @@ const PersonnelSchema = new mongoose.Schema(
       default: Date.now(),
     },
   },
-  { collation: "Personnel", timestamps: true }
+  { collection: "Personnel", timestamps: true }
 );
 
 module.exports = mongoose.model("Personnel", PersonnelSchema);

@@ -5,19 +5,13 @@
 const { mongoose } = require("../configs/dbConnection");
 /* ------------------------------------------------------- */
 
-var DepartmentSchema = new mongoose.Schema(
+const DepartmentSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       trim: true,
       required: true,
-      unique: true,
-    },
-    departmentId: {
-      type: String,
-      required: true,
-      unique: true,
-      index: true,
+      unique: false,
     },
   },
   { collection: "Department", timestamps: true }
