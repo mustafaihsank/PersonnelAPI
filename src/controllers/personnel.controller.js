@@ -36,6 +36,13 @@ module.exports = {
     });
   },
   update: async (req, res) => {
+    // Only Admin can change salary and someones isAdmin or isLead status
+    if (!req.user.isAdmin) {
+      req.body.isAdmin = false;
+      delete req.body.isLead;
+      delete req.body.salary;
+    }
+
     if (req.body.isLead) {
       const { departmentId } = await PersonnelModel.findOne(
         { _id: req.params.id },
