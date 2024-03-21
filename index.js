@@ -29,6 +29,42 @@ const { dbConnection } = require("./src/configs/dbConnection");
 dbConnection();
 
 /* ------------------------------------------------------- */
+// MORGAN -> LOGGING
+app.use(require("./src/middlewares/logging"));
+
+/* ------------------------------------------------------- */
+// Documentation
+// $ npm i swagger-autogen
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
+
+// JSON -> localhost:8000/documents/json
+app.use("/documents/json", (req, res) => {
+  res.sendFile("swagger.json", { root: "." });
+});
+
+// Swagger UI -> -> localhost:8000/documents/swagger
+const swaggerUI = require("swagger-ui-express");
+const swaggerJson = require("./swagger.json");
+app.use(
+  "/documents/swagger",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerJson, {
+    swaggerOptions: { persistAuthorization: true },
+  })
+);
+
+// REDOC -> localhost:8000/documents/redoc
+const redoc = require("redoc-express");
+app.use(
+  "/documents/redoc",
+  redoc({
+    title: "PersonnelAPI",
+    specUrl: "/documents/json",
+  })
+);
+
+/* ------------------------------------------------------- */
 // Middlewares:
 
 // Accept JSON:
@@ -55,6 +91,14 @@ app.all("/", (req, res) => {
     error: false,
     message: "Welcome to Personnel API",
     user: res.user,
+    api: {
+      documents: {
+        swagger: "http://127.0.0.1:8000/documents/swagger",
+        redoc: "http://127.0.0.1:8000/documents/redoc",
+        json: "http://127.0.0.1:8000/documents/json",
+      },
+      contact: "mustafaihsankabakcili@gmail.com",
+    },
   });
 });
 
