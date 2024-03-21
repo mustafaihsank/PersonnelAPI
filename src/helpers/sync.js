@@ -5,7 +5,7 @@
 // SYCHRONIZATION:
 
 module.exports = async function () {
-  return null;
+  return null; // Additional check
 
   /* REMOVE DATABASE */
   const { mongoose } = require("../configs/dbConnection");

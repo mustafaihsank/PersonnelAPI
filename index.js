@@ -41,19 +41,25 @@ app.use(require("cookie-session")({ secret: process.env.SECRET_KEY }));
 app.use(require("./src/middlewares/findSearchSortPage"));
 
 /* ------------------------------------------------------- */
+// Authentication With Simple Token:
+
+// Authentication:
+app.use(require("./src/middlewares/authentication"));
+/* ------------------------------------------------------- */
+
+/* ------------------------------------------------------- */
 // Routes:
 
 app.all("/", (req, res) => {
   res.send({
     error: false,
     message: "Welcome to Personnel API",
+    user: res.user,
   });
 });
 
-// URL: /departments
-app.use("/departments", require("./src/routes/department.router"));
-// URL: /personnels
-app.use("/personnels", require("./src/routes/personnel.router"));
+// routes
+app.use(require("./src/routes"));
 
 /* ------------------------------------------------------- */
 

@@ -7,6 +7,9 @@
 module.exports = (req, res, next) => {
   // Searching & Sorting & Pagination:
 
+  // FILTERING: URL?filter[key1]=value1&filter[key2]=value2
+  const filter = req.query?.filter || {};
+
   // SEARCHING: URL?search[key1]=value1&search[key2]=value2
   const search = req.query?.search || {};
   for (let key in search) search[key] = { $regex: search[key], $options: "i" };
@@ -28,7 +31,7 @@ module.exports = (req, res, next) => {
 
   // Run SearchingSortingPagination engine for Model:
   res.getModelList = async function (Model, filters = {}, populate = null) {
-    const filtersAndSearch = { ...filters, ...search };
+    const filtersAndSearch = { ...filter, ...filters, ...search };
     return await Model.find(filtersAndSearch)
       .sort(sort)
       .skip(skip)

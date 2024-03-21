@@ -5,19 +5,17 @@
 const router = require("express").Router();
 /* ------------------------------------------------------- */
 
-const PersonnelController = require("../controllers/personnel.controller");
+const TokenController = require("../controllers/token.controller");
 
-// URL: /personnels
-router
-  .route("/")
-  .get(PersonnelController.list)
-  .post(PersonnelController.create);
+// URL: /departments
+router.route("/").get(TokenController.list).post(TokenController.create);
 
 router
   .route("/:id")
-  .get(PersonnelController.read)
-  .put(PersonnelController.update)
-  .patch(PersonnelController.update)
-  .delete(PersonnelController.delete);
+  .get(TokenController.read)
+  .put(TokenController.update)
+  .patch(TokenController.update)
+  .delete(TokenController.delete);
+
 /* ------------------------------------------------------- */
 module.exports = router;
