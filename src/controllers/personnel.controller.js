@@ -7,6 +7,10 @@ const PersonnelModel = require("../models/personnel.model");
 
 module.exports = {
   list: async (req, res) => {
+    /*
+        #swagger.tags = ["Personnels"]
+        #swagger.summary = "List Personnels"
+    */
     const data = await res.getModelList(PersonnelModel);
     res.status(200).send({
       error: false,
@@ -15,6 +19,10 @@ module.exports = {
     });
   },
   create: async (req, res) => {
+    /*
+        #swagger.tags = ["Personnels"]
+        #swagger.summary = "Create Personnel"
+    */
     if (req.body.isLead)
       await departmentModel.updateMany(
         { departmentId: req.body.departmentId, isLead: true },
@@ -28,6 +36,10 @@ module.exports = {
     });
   },
   read: async (req, res) => {
+    /*
+        #swagger.tags = ["Personnels"]
+        #swagger.summary = "Get Single Personnel"
+    */
     const data = await PersonnelModel.findOne({ _id: req.params.id });
 
     res.status(200).send({
@@ -36,6 +48,11 @@ module.exports = {
     });
   },
   update: async (req, res) => {
+    /*
+        #swagger.tags = ["Personnels"]
+        #swagger.summary = "Update Personnel"
+    */
+
     // Only Admin can change salary and someones isAdmin or isLead status
     if (!req.user.isAdmin) {
       req.body.isAdmin = false;
@@ -66,6 +83,11 @@ module.exports = {
     });
   },
   delete: async (req, res) => {
+    /*
+        #swagger.tags = ["Personnels"]
+        #swagger.summary = "Delete Personnel"
+    */
+
     const data = await PersonnelModel.deleteOne({ _id: req.params.id });
 
     res.status(data.deletedCount ? 204 : 404).send({
