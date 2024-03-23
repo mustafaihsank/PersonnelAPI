@@ -75,7 +75,7 @@ module.exports = {
       { runValidators: true }
     );
 
-    es.status(202).send({
+    res.status(202).send({
       error: false,
       data,
     });

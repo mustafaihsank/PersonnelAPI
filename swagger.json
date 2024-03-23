@@ -332,8 +332,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -389,8 +389,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "202": {
+            "description": "Accepted"
           }
         }
       }
@@ -711,7 +711,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1711056610967
+              "example": 1711181837496
             }
           }
         }
