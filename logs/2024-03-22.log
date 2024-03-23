@@ -1,0 +1,3 @@
+::ffff:127.0.0.1 - - [22/Mar/2024:19:35:02 +0000] "GET /departments/ HTTP/1.1" 200 566 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [22/Mar/2024:19:35:03 +0000] "GET /departments/ HTTP/1.1" 200 566 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [22/Mar/2024:19:35:10 +0000] "GET /personnels/ HTTP/1.1" 200 12585 "-" "Thunder Client (https://www.thunderclient.com)"
